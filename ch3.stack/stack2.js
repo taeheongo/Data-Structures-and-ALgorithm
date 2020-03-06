@@ -1,4 +1,4 @@
-class Stack {
+exports.Stack = class Stack {
   constructor() {
     this.items = [];
   }
@@ -30,6 +30,10 @@ class Stack {
   print() {
     console.log(this.items.toString());
   }
+
+  toString(){
+    return this.items.toString();
+};
 }
 
 function divdeBy2(decNum) {
@@ -49,7 +53,7 @@ function divdeBy2(decNum) {
 
   return binaryNumber;
 }
-console.log(divdeBy2(5));
+// console.log(divdeBy2(5)); 101
 
 function divdeBy2_2nd(decNum) {
   let rems = new Stack();
@@ -69,4 +73,4 @@ function divdeBy2_2nd(decNum) {
   })();
 }
 
-console.log(divdeBy2_2nd(5));
+// console.log(divdeBy2_2nd(5)); // 101
