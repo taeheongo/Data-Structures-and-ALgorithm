@@ -95,7 +95,7 @@ class LinkedList {
         let index = this.indexOf(element);
         this.removeAt(index);
     }
-    isEmtpy() {
+    isEmpty() {
         return this.head === 0;
     }
     size() {
@@ -145,3 +145,5 @@ class LinkedList {
 // console.log("size: ", linkedlist.size());
 // console.log("getHead: ", linkedlist.getHead());
 // console.log("isEmpty", linkedlist.isEmtpy());
+
+module.exports = LinkedList;
