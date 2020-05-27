@@ -66,41 +66,36 @@ function removeNode(node, key) {
         return null;
     }
 
-    if (key > node.key) {
-        node.left = removeNode(node.left, key);
+    if (key < node.key) {
+        node.left = removeNode(node.left, key)
         return node;
-    } else if (key < node.key) {
-        node.right = removeNode(node.right, key);
+    } else if (key > node.key) {
+        node.right = removeNode(node.right, key)
         return node;
     } else {
         if (!node.left && !node.right) {
             node = null;
             return node;
+        } else if (!node.right) {
+            node = node.left;
+            return node;
+        } else if (!node.left) {
+            node = node.right
+            return node;
         } else {
-            if (!node.left) {
-                node = node.right
-                return node;
-            }
-            if (!node.right) {
-                node = node.left;
-                return node;
-            }
-
             let aux = findMinNode(node.right);
             node.key = aux.key;
-            node.right = removeNode(node.right, aux.key)
+            node.right = removeNode(node.right, aux.key);
             return node;
         }
     }
 }
 
-function findMinNode(node) {
-    if (node) {
-        if (!node.left) {
-            return node;
-        }
-        return findminNode(node.left, callback);
+function findMinNode(node){
+    if(!node.left){
+        return node;
     }
+    return findMinNode(node.left);
 }
 
 function searchNode(node, key) {
@@ -232,4 +227,4 @@ tree2
 console.log('>>>>>>>>>>>remove:')
 console.log(tree2.remove(15));
 
-tree2.inOrderTraverse();
+console.log(tree2.inOrderTraverse())
