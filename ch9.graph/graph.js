@@ -96,7 +96,7 @@ class Graph {
 
         for (let u of neighbors) {
             if (color[u] === 'white') {
-                p[v] = u;
+                p[u] = v;
                 this.dfsVisit(u, color, d, f, p);
             }
         }
