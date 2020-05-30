@@ -6,6 +6,7 @@ class Graph {
     constructor() {
         this.vertices = [];
         this.adjList = new Map();
+        this.time = 0;
     }
 
     addVertex(v) {
@@ -56,7 +57,9 @@ class Graph {
                 }
             }
             color[u] = 'black';
-            callback(u);
+            if (callback) {
+                callback(u);
+            }
         }
 
         return {
@@ -64,8 +67,47 @@ class Graph {
             predecessor: pred
         }
     }
+    dfs() {
+        const color = initializeColor(this);
 
+        let d = {};
+        let f = {};
+        let p = {};
+
+        for (let v of this.vertices) {
+            d[v] = 0;
+            f[v] = 0;
+            p[v] = null;
+        }
+
+        this.dfsVisit(this.vertices[0], color, d, f, p);
+
+        return {
+            discovery: d,
+            finished: f,
+            predecessor: p
+        }
+    }
+
+    dfsVisit(v, color, d, f, p) {
+        color[v] = 'grey';
+        d[v] = ++this.time;
+        let neighbors = this.adjList.get(v);
+
+        for (let u of neighbors) {
+            if (color[u] === 'white') {
+                p[v] = u;
+                this.dfsVisit(u, color, d, f, p);
+            }
+        }
+
+        color[v] = 'black';
+        console.log('탐색 끝: ', v);
+        f[v] = ++this.time;
+    }
 }
+
+
 
 function initializeColor(graph) {
     let color = {};
@@ -98,6 +140,10 @@ graph
     .addEdge('E', 'I');
 
 graph.toString();
+
+// bfs를 이용한 최단거리 구하기
+console.log('-----------------------bfs:')
+
 let result = graph.bfs(graph.vertices[0], (value) => {
     console.log('탐색 끝: ', value);
 })
@@ -121,3 +167,12 @@ for (let i = 1; i < graph.vertices.length; i++) {
 
     console.log(string);
 }
+
+// dfs
+console.log('-----------------------dfs:')
+
+
+
+result = graph.dfs();
+
+console.log("dfs result: ", result);
