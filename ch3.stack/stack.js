@@ -1,3 +1,4 @@
+// Stack Class
 function Stack() {
   let items = [];
 
@@ -54,7 +55,7 @@ function divdeBy2_2nd(decNum) {
   let rems = new Stack();
   let binaryNumber="";
   
-  return (function temp(){
+  return (function temp(){ 
     if (decNum === 0) {
       while(!rems.isEmpty()){
         binaryNumber += rems.pop().toString();
@@ -64,8 +65,8 @@ function divdeBy2_2nd(decNum) {
     rems.push(Math.floor(decNum % 2));
     decNum = Math.floor(decNum / 2);
   
-    return temp(decNum);
+    return temp();
   })();
 }
 
-console.log(divdeBy2_2nd(5));
+console.log(divdeBy2_2nd(10));

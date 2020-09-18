@@ -1,4 +1,11 @@
-const Queue = require("./queue.js");
+const { Queue } = require("./queue.js");
+
+class QueueElement {
+  constructor(element, priority) {
+    this.element = element;
+    this.priority = priority;
+  }
+}
 
 class PriorityQueue extends Queue {
   constructor() {
@@ -6,27 +13,20 @@ class PriorityQueue extends Queue {
   }
 
   enqueue(element, priority) {
-    class QueueElement {
-      constructor(element, priority) {
-        this.element = element;
-        this.priority = priority;
-      }
-    }
-
     const queueElement = new QueueElement(element, priority);
-
+   
     if (this.isEmpty()) {
       this.items.push(queueElement);
     } else {
-      let added = false;
-      for (let i = 0; i < this.items.length; i++) {
+      let isAdded = false;
+      for (let i = 0; i < this.size(); i++) {
         if (queueElement.priority < this.items[i].priority) {
           this.items.splice(i, 0, queueElement);
-          added = true;
-            break;
+          isAdded = true;
+          break;
         }
       }
-      if (!added) {
+      if (!isAdded) {
         this.items.push(queueElement);
       }
     }
@@ -34,8 +34,13 @@ class PriorityQueue extends Queue {
 }
 
 const pQueue1 = new PriorityQueue();
-pQueue1.enqueue("a", 2);
-pQueue1.enqueue("b", 1);
+pQueue1.enqueue("a", 4);
+pQueue1.enqueue("b", 2);
 pQueue1.enqueue("c", 1);
 
-console.log(pQueue1);
+console.log(pQueue1.items);
+
+module.exports = {
+  Queue,
+  QueueElement,
+};

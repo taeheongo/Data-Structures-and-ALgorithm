@@ -3,8 +3,8 @@ class Queue {
     this.items = [];
   }
 
-  enqueue() {
-    return this.items.shift();
+  enqueue(element) {
+    return this.items.push(element);
   }
 
   dequeue() {
@@ -32,4 +32,6 @@ class Queue {
   }
 }
 
-module.exports = Queue;
+module.exports = {
+  Queue,
+};

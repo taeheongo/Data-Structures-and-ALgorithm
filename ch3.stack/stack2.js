@@ -1,4 +1,4 @@
-exports.Stack = class Stack {
+class Stack {
   constructor() {
     this.items = [];
   }
@@ -31,12 +31,13 @@ exports.Stack = class Stack {
     console.log(this.items.toString());
   }
 
-  toString(){
+  toString() {
     return this.items.toString();
-};
+  }
 }
 
-function divdeBy2(decNum) {
+// Decimal => Binary
+const divideBy2 = (decNum) => {
   let remainder,
     rems = new Stack(),
     binaryNumber = "";
@@ -52,10 +53,13 @@ function divdeBy2(decNum) {
   }
 
   return binaryNumber;
-}
-// console.log(divdeBy2(5)); 101
+};
 
-function divdeBy2_2nd(decNum) {
+// TEST
+// console.log(divideBy2(5));
+
+// Decimal => Binary Recursive version
+const divideBy2_2nd = (decNum) => {
   let rems = new Stack();
   let binaryNumber = "";
 
@@ -69,8 +73,15 @@ function divdeBy2_2nd(decNum) {
     rems.push(Math.floor(decNum % 2));
     decNum = Math.floor(decNum / 2);
 
-    return temp(decNum);
+    return temp();
   })();
-}
+};
 
+// TEST
 // console.log(divdeBy2_2nd(5)); // 101
+
+module.exports = {
+  Stack,
+  divideBy2,
+  divideBy2_2nd
+};
