@@ -1,92 +1,91 @@
-const LinkedList = require('../ch5.linkedList/linkedList');
+const { LinkedList } = require("../ch5.linkedList/linkedList");
+const { loseloseHashCode, djb2HashCode } = require("./hashFunctions");
 
 class ValuePair {
-    constructor(key, value) {
-        this.key = key;
-        this.value = value;
-    }
-    toString() {
-        return '[' + key + value + ']';
-    }
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+  }
+  toString() {
+    return `[${key} ${value}]`;
+  }
 }
 
 class HashTable {
-    constructor() {
-        this.table = {};
-    }
+  constructor() {
+    this.table = {};
+  }
 
-    put(key, value) {
-        let position = loseloseHashCode(key);
-        if (!this.table[position]) {
-            this.table[position] = new LinkedList();
+  put(key, value) {
+    let position = djb2HashCode(key);
+    if (!this.table[position]) {
+      this.table[position] = new LinkedList();
+    }
+    this.table[position].append(new ValuePair(key, value));
+    return this;
+  }
+
+  get(key) {
+    let position = djb2HashCode(key);
+
+    if (this.table[position] !== undefined) {
+      let current = this.table[position].getHead();
+      let values = [];
+
+      while (current) {
+        if (current.element.key === key) {
+          values.push(current.element.value);
         }
-        this.table[position].append(new ValuePair(key, value))
-        return this;
+        current = current.next;
+      }
+
+      return values.length > 0 ? values : null;
+    } else {
+      return null;
     }
+  }
 
-    get(key) {
-        let position = loseloseHashCode(key);
+  remove(key) {
+    let position = djb2HashCode(key);
+    if (this.table[position] !== undefined) {
+      let current = this.table[position].getHead();
 
-        if (this.table[position]) {
-            let current = this.table[position].getHead();
+      while (current) {
+        if (current.element.key === key) {
+          this.table[position].remove(current.element);
 
-            while (current) {
-                if (current.element.key === key) {
-                    return current.element.value;
-                }
-                current.next = current;
-            }
+          if (this.table[position].isEmpty()) {
+            this.table[position] = undefined;
+          }
 
-            return null;
-        } else {
-            return null;
+          return true;
         }
+        current = current.next;
+      }
+      return false;
+    } else {
+      return null;
     }
-
-    remove(key) {
-        let position = loseloseHashCode(key);
-        if (this.table[position]) {
-            let current = this.table[position].getHead();
-
-            while (current) {
-                if (current.element.key === key) {
-                    this.table[position].remove(current.element);
-                    if (this.table[position].isEmpty()) {
-                        this.table[position] = undefined;
-                    }
-                    return true;
-                }
-                current = current.next;
-            }
-            return false;
-        } else {
-            return null;
-        }
-    }
+  }
 }
 
-const loseloseHashCode = key => {
-    let hash = 0;
-    for (let i = 0; i < key.length; i++) {
-        hash += key.charCodeAt(i);
-    }
+// const hashTable = new HashTable();
 
-    return hash % 37;
-}
+// hashTable
+//   .put("red", "apple")
+//   .put("red", "ramen")
+//   .put("red", "kimchi")
+//   .put("blue", "sea")
+//   .put("blue", "sky");
 
-const hashTable = new HashTable();
+// console.log(hashTable);
 
-hashTable
-    .put('red', 'apple')
-    .put('red', 'ramen')
-    .put('red', 'kimchi')
-    .put('blue', 'sea')
-    .put('blue', 'sky');
+// console.log(hashTable.get("red"));
+// console.log(hashTable.get("blue"));
 
-console.log(hashTable);
+// console.log(hashTable.remove("red"));
+// console.log(hashTable.get("red"));
 
-console.log(hashTable.get('red'));
-console.log(hashTable.get('blue'))
-
-console.log(hashTable.remove('red'));
-console.log(hashTable.get('red'));
+module.exports = {
+  HashTable,
+};
