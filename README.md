@@ -4,12 +4,12 @@
 
 ## Contents
 
-- [ ] Stack
-- [ ] Queue
-- [ ] Linked List
-- [ ] Set
-- [ ] Dictionary and Hash
-- [ ] Tree
-- [ ] Graph
+- [x] Stack
+- [x] Queue
+- [x] Linked List
+- [x] Set
+- [x] Dictionary and Hash
+- [x] Tree
+- [x] Graph
 - [ ] Sort and Search Algorithms
 - [ ] Other Algorithms

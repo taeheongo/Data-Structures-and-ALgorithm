@@ -1,6 +1,5 @@
 const { Map } = require("../ch7.map/map");
 const { Queue } = require("../ch4.queue/queue");
-const { Stack } = require("../ch3.stack/stack");
 
 const WHITE = "white";
 const GREY = "grey";
@@ -64,19 +63,22 @@ class Graph {
       for (let w of neighbors) {
         if (color[w] === WHITE) {
           color[w] = GREY;
+          if (callback && typeof callback === "function") {
+            callback(`${u} visited`);
+          }
           queue.enqueue(w);
         }
       }
 
       color[u] = BLACK;
       if (callback && typeof callback === "function") {
-        callback(`${u} 탐색완료`);
+        callback(`${u} finished`);
       }
     }
   }
 
   // BFS를 이용해서 최단거리 찾기
-  findShortestWayWithBFS(v) {
+  BFS(v) {
     let color = initializeColor.call(this);
 
     if (!Object.keys(color).includes(v)) {
@@ -85,8 +87,8 @@ class Graph {
 
     let queue = new Queue();
     queue.enqueue(v);
-    let pred = [],
-      d = [];
+    let pred = {},
+      d = {};
 
     for (let vertex of this.vertices) {
       d[vertex] = 0;
@@ -113,32 +115,71 @@ class Graph {
       predecessors: pred,
     };
   }
+
+  dfs(callback) {
+    const color = initializeColor.call(this);
+    for (let v of this.vertices) {
+      if (color[v] === WHITE) {
+        this.dfsVisit(this.vertices[0], color, callback);
+      }
+    }
+  }
+
+  dfsVisit(u, color, callback) {
+    color[u] = GREY;
+    let neighbors = this.adjList.get(u);
+
+    if (callback && typeof callback === "function") {
+      callback(`${u} visited`);
+    }
+
+    for (let w of neighbors) {
+      if (color[w] === WHITE) {
+        this.dfsVisit(w, color, callback);
+      }
+    }
+
+    color[u] = BLACK;
+    if (callback && typeof callback === "function") {
+      callback(`${u} finished`);
+    }
+  }
+
+  DFS() {
+    const color = initializeColor.call(this);
+    const d = {},
+      f = {},
+      p = {};
+
+    for (let v of this.vertices) {
+      if (color[v] === WHITE) {
+        this.DFSVisit(v, color, d, f, p);
+      }
+    }
+    return {
+      distances: d,
+      predecessors: p,
+      finished: f,
+    };
+  }
+
+  DFSVisit(u, color, d, f, p) {
+    color[u] = GREY;
+    d[u] = ++this.time;
+    let neighbors = this.adjList.get(u);
+
+    for (let w of neighbors) {
+      if (color[w] === WHITE) {
+        p[w] = u;
+        this.DFSVisit(w, color, d, f, p);
+      }
+    }
+
+    color[u] = BLACK;
+    f[u] = ++this.time;
+  }
 }
 
-const graph = new Graph();
-
-const myVertices = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-
-for (let val of myVertices) {
-  graph.addVertex(val);
-}
-
-graph
-  .addEdge("A", "B")
-  .addEdge("A", "C")
-  .addEdge("A", "D")
-  .addEdge("C", "D")
-  .addEdge("C", "G")
-  .addEdge("D", "G")
-  .addEdge("D", "H")
-  .addEdge("B", "E")
-  .addEdge("B", "F")
-  .addEdge("E", "I");
-
-graph.toString();
-
-graph.bfs("A", (value) => {
-  console.log(value);
-});
-
-console.log("findShortestWayWithBFS: ", graph.findShortestWayWithBFS("A"));
+module.exports = {
+  Graph,
+};
