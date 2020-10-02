@@ -13,7 +13,7 @@ const djb2HashCode = (key) => {
     hash += hash * 31 + key.charCodeAt(i);
   }
 
-  return 1013;
+  return 1013 * hash;
 };
 
 module.exports = {

@@ -1,7 +1,7 @@
 const { Graph } = require("./graph");
 const { Stack } = require("../ch3.stack/stack");
 
-// BFS를 이용한 특정 노드로부터 모든 최단거리 찾는 함수
+// BFS를 이용한 각 노드에사 특정 노드까지 모든 최단거리 찾는 함수
 function findShortestWayWithBFS(graph, v) {
   const preds = graph.BFS(v).predecessors;
   const predKeys = Object.keys(preds).filter((elem) => elem !== v);
