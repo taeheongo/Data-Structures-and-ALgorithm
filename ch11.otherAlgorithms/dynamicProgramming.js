@@ -1,43 +1,4 @@
-// // 최소 동전 교환문제
-
-// function MinCoinChange(coins) {
-//   var coins = coins;
-
-//   var cache = {};
-
-//   this.makeChange = function (amount) {
-//     var me = this;
-//     if (!amount) {
-//       return [];
-//     }
-//     if (cache[amount]) {
-//       return cache[amount];
-//     }
-//     var min = [], // 최소 동전 배열
-//       newMin, // 새로운 최소 동전 배열
-//       newAmount; // 새로운 amount
-
-//     // coin별로 테스트
-//     for (var i = 0; i < coins.length; i++) {
-//       var coin = coins[i];
-//       newAmount = amount - coin; // amount 에서 coin을 뺀 값을  newAmount로 한다.
-//       if (newAmount >= 0) {
-//         // 동전값이 amount보다 작을때
-//         newMin = me.makeChange(newAmount); // newAmount를 최소 동전 배열로 표현
-//       }
-//       if (
-//         newAmount >= 0 &&
-//         (newMin.length + 1 < min.length || !min.length) &&
-//         (newMin.length || !newAmount)
-//       ) {
-//         min = [coin].concat(newMin);
-//         console.log("new Min " + min + " for " + amount);
-//       }
-//     }
-//     return (cache[amount] = min);
-//   };
-// }
-
+// 최소 동전 교환
 class MinCoinChange {
   constructor(coins) {
     this.coins = coins;
