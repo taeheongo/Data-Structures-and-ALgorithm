@@ -11,5 +11,5 @@
 - [x] Dictionary and Hash
 - [x] Tree
 - [x] Graph
-- [ ] Sort and Search Algorithms
-- [ ] Other Algorithms
+- [x] Sort and Search Algorithms
+- [x] Other Algorithms
