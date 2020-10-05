@@ -11,6 +11,7 @@ function initializeColor() {
   for (let val of this.vertices) {
     color[val] = WHITE;
   }
+
   return color;
 }
 
@@ -120,7 +121,7 @@ class Graph {
     const color = initializeColor.call(this);
     for (let v of this.vertices) {
       if (color[v] === WHITE) {
-        this.dfsVisit(this.vertices[0], color, callback);
+        this.dfsVisit(v, color, callback);
       }
     }
   }
@@ -156,6 +157,7 @@ class Graph {
         this.DFSVisit(v, color, d, f, p);
       }
     }
+
     return {
       distances: d,
       predecessors: p,
