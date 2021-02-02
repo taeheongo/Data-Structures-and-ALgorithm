@@ -1,6 +1,13 @@
 class ArrayList {
-  constructor() {
+  constructor(size) {
+    this._init(size);
+  }
+
+  _init(size) {
     this.array = [];
+    for (let i = size - 1; i >= 0; i--) {
+      this.array.push(i);
+    }
   }
 
   insert(item) {
@@ -14,7 +21,7 @@ class ArrayList {
   }
 
   toString() {
-    return this.array.join();
+    return this.array.join("");
   }
 
   // 버블 정렬
@@ -156,9 +163,9 @@ class ArrayList {
       }
 
       if (i <= j) {
+        this.swapQuickSort(array, i, j);
         i++;
         j--;
-        this.swapQuickSort(array, i, j);
       }
     }
   }
@@ -191,93 +198,6 @@ class ArrayList {
   }
 }
 
-// Test
-
-// 버블정렬
-console.log("------------------bubble sort:");
-const arrayList = new ArrayList();
-arrayList.insert(3);
-arrayList.insert(5);
-arrayList.insert(1);
-arrayList.insert(4);
-arrayList.insert(2);
-
-arrayList.bubbleSort();
-console.log(arrayList.toString());
-
-// 개선된 정렬
-console.log("------------------modified sort:");
-const arrayList2 = new ArrayList();
-arrayList2.insert(3);
-arrayList2.insert(5);
-arrayList2.insert(1);
-arrayList2.insert(4);
-arrayList2.insert(2);
-
-arrayList2.modifiedBubbleSort();
-console.log(arrayList2.toString());
-
-// 선택정렬
-console.log("------------------selection sort:");
-const arrayList3 = new ArrayList();
-arrayList3.insert(3);
-arrayList3.insert(5);
-arrayList3.insert(1);
-arrayList3.insert(4);
-arrayList3.insert(2);
-
-arrayList3.selectionSort();
-console.log(arrayList3.toString());
-
-// 삽입정렬
-console.log("------------------insertion sort:");
-const arrayList4 = new ArrayList();
-arrayList4.insert(3);
-arrayList4.insert(5);
-arrayList4.insert(1);
-arrayList4.insert(4);
-arrayList4.insert(2);
-
-arrayList4.insertionSort();
-console.log(arrayList4.toString());
-
-// 병합정렬
-console.log("------------------merge sort:");
-const arrayList5 = new ArrayList();
-arrayList5.insert(8);
-arrayList5.insert(7);
-arrayList5.insert(5);
-arrayList5.insert(4);
-arrayList5.insert(6);
-arrayList5.insert(3);
-arrayList5.insert(1);
-arrayList5.insert(2);
-arrayList5.mergeSort();
-console.log(arrayList5.toString());
-
-// 퀵정렬
-console.log("------------------quick sort:");
-const arrayList6 = new ArrayList();
-arrayList6.insert(8);
-arrayList6.insert(7);
-arrayList6.insert(5);
-arrayList6.insert(4);
-arrayList6.insert(6);
-arrayList6.insert(3);
-arrayList6.insert(1);
-arrayList6.insert(2);
-arrayList6.mergeSort();
-console.log(arrayList6.toString());
-
-// 이진탐색
-console.log("------------------binary search:");
-const arrayList7 = new ArrayList();
-arrayList7.insert(8);
-arrayList7.insert(7);
-arrayList7.insert(5);
-arrayList7.insert(4);
-arrayList7.insert(6);
-arrayList7.insert(3);
-arrayList7.insert(1);
-arrayList7.insert(2);
-console.log(arrayList7.binarySearch(7));
+module.exports = {
+  ArrayList,
+};

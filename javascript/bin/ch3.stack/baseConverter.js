@@ -1,4 +1,4 @@
-const { Stack } = require("./stack2.js");
+const { Stack } = require("./stack.js");
 
 // parseInt() function
 function baseConverter(decNum, base) {
@@ -32,6 +32,5 @@ function baseConverter(decNum, base) {
 // console.log(String.fromCharCode(65))
 
 module.exports = {
-  baseConverter
-}
-
+  baseConverter,
+};
