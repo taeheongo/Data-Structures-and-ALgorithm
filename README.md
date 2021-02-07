@@ -13,3 +13,13 @@
 - [x] Graph
 - [x] Sort and Search Algorithms
 - [x] Other Algorithms
+
+## Test
+
+# javascript
+
+    npm run test [testfile path]
+
+# dart
+
+    dart run test [testfile path]

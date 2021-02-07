@@ -140,7 +140,6 @@ class ArrayList {
     int index;
 
     if (list.length > 1) {
-      // 재귀함수를 위한 중단조건.
       index = partition(list, left, right);
 
       if (left < index - 1) {
