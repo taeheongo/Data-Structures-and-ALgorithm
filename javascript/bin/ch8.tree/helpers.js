@@ -29,16 +29,16 @@ const removeNode = (node, key) => {
     if (!node.left && !node.right) {
       node = null;
       return node;
-    } else if (!node.right) {
+    } else if (node.left && !node.right) {
       node = node.left;
       return node;
-    } else if (!node.left) {
+    } else if (!node.left && node.right) {
       node = node.right;
       return node;
     } else {
       let aux = findMinNode(node.right);
       node.key = aux.key;
-      removeNode(node.right, aux.key);
+      node.right = removeNode(node.right, aux.key);
       return node;
     }
   }
@@ -67,7 +67,7 @@ const searchNode = (node, key) => {
 const maxNode = (node, callback) => {
   if (node) {
     if (!node.right) {
-      callback(node.key);
+      callback(node);
       return;
     }
     maxNode(node.right, callback);
@@ -77,7 +77,7 @@ const maxNode = (node, callback) => {
 const minNode = (node, callback) => {
   if (node) {
     if (!node.left) {
-      callback(node.key);
+      callback(node);
       return;
     }
     minNode(node.left, callback);
