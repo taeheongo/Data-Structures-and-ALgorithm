@@ -41,28 +41,26 @@ void main() {
     });
 
     test('the shortest length from A to F is 2', () {
+      print(graph.BFS(myVertices[0], null));
       expect(graph.BFS(myVertices[0], null)['distances']['F'], 2);
 
       // you can see the shortest paths
 
-      // for (var i = 1; i < myVertices.length; i++) {
-      //   var start = myVertices[0];
-      //   var path = [];
-      //   var pred = graph.BFS(myVertices[0], null)['predecessors'];
+      for (var v in myVertices) {
+        if (v == myVertices[0]) {
+          continue;
+        }
 
-      //   for (var vertex = myVertices[i];
-      //       vertex != start;
-      //       vertex = pred[vertex]) {
-      //     path.add(vertex);
-      //   }
+        var pred = graph.BFS(myVertices[0], null)['predecessors'];
 
-      //   var s = '${myVertices[0]} -> ';
-      //   while (path.isNotEmpty) {
-      //     var pop = path.removeLast();
-      //     s += path.isNotEmpty ? '$pop -> ' : pop;
-      //   }
-      //   print(s);
-      // }
+        var s = '';
+        for (var vert = v; vert != myVertices[0]; vert = pred[vert]) {
+          s = '-> $vert' + s;
+        }
+
+        s = '${myVertices[0]}' + s;
+        print(s);
+      }
     });
 
     test('dfs :', () {
@@ -70,6 +68,7 @@ void main() {
     });
 
     test('DFS : the finished time of I is 5', () {
+      print(graph.DFS()['finished']['I']);
       expect(graph.DFS()['finished']['I'], 5);
     });
 

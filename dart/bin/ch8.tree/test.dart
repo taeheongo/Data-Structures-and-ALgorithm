@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import "binary_search_tree.dart";
-import "package:test/test.dart";
+import 'package:test/test.dart';
 
 void testBinarySearchTree() {
   group('binarySearchTree:', () {
