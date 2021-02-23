@@ -44,6 +44,7 @@ void main() {
       expect(graph.BFS(myVertices[0], null)['distances']['F'], 2);
 
       // you can see the shortest paths
+
       // for (var i = 1; i < myVertices.length; i++) {
       //   var start = myVertices[0];
       //   var path = [];
@@ -64,6 +65,29 @@ void main() {
       // }
     });
 
-    test('dfs :', () {});
+    test('dfs :', () {
+      graph.dfs((value) => print(value));
+    });
+
+    test('DFS : the finished time of I is 5', () {
+      expect(graph.DFS()['finished']['I'], 5);
+    });
+
+    test('DAG :', () {
+      var dag = DAG();
+      var myVerties2 = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+      for (var v in myVerties2) {
+        dag.addVertex(v);
+      }
+      dag.addEdge("A", "C");
+      dag.addEdge("A", "D");
+      dag.addEdge("B", "D");
+      dag.addEdge("B", "E");
+      dag.addEdge("C", "F");
+      dag.addEdge("F", "E");
+
+      expect(dag.topoligicalSort(), ['B', 'A', 'D', 'C', 'F', 'E']);
+    });
   });
 }
