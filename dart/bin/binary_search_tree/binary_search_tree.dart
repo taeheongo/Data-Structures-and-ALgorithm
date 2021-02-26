@@ -120,36 +120,37 @@ class BinarySearchTree {
   }
 
   bool remove(key) {
-    removeNode(root, key);
+    _removeNode(root, key);
     return search(key) == null ? true : false;
   }
 
-  Node removeNode(Node node, dynamic key) {
+  Node _removeNode(Node node, dynamic key) {
     if (node == null) {
       return null;
     }
 
     if (node.key > key) {
-      node.left = removeNode(node.left, key);
+      node.left = _removeNode(node.left, key);
       return node;
     } else if (node.key < key) {
-      node.right = removeNode(node.right, key);
+      node.right = _removeNode(node.right, key);
       return node;
     } else {
       if (node.left == null && node.right == null) {
         node = null;
         return node;
       } else if (node.left != null && node.right == null) {
-        node.left = removeNode(node.left, key);
+        // node.left를 최고 노드로 하는 트리에서 key와 같은 값을 다 제거하고난 node.left를 넣어줌.
+        node = _removeNode(node.left, key);
         return node;
-      } else if (node.right == null && node.left != null) {
-        node.right = removeNode(node.right, key);
+      } else if (node.left == null && node.right != null) {
+        // node.left를 최고 노드로 하는 트리에서 key와 같은 값을 다 제거하고난 node.left를 넣어줌.
+        node = _removeNode(node.right, key);
         return node;
       } else {
         var aux = findMinNode(node.right);
         node.key = aux.key;
-        node.right = removeNode(node.right, aux.key);
-
+        node.right = _removeNode(node.right, aux.key);
         return node;
       }
     }

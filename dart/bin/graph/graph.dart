@@ -1,4 +1,4 @@
-import '../ch4.queue/queue.dart';
+import '../queue/queue.dart';
 
 typedef Callback = void Function(dynamic value);
 
