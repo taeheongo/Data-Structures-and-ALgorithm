@@ -68,7 +68,7 @@ void main() {
     });
 
     test('DFS : the finished time of I is 5', () {
-      print(graph.DFS()['finished']['I']);
+      print(graph.DFS());
       expect(graph.DFS()['finished']['I'], 5);
     });
 

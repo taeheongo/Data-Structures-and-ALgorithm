@@ -129,28 +129,28 @@ class Graph {
   }
 
   Map<String, Map> DFS() {
-    var f = {}, d = {}, p = {};
+    var f = {}, s = {}, p = {};
     var state = _initState();
     _time = 0; // initiate time 0;
 
     for (var v in _vertices) {
-      d[v] = 0;
+      s[v] = 0;
     }
 
     for (var v in _vertices) {
       if (state[v] == State.unvisited) {
-        _DFSVisit(v, state, f, d, p);
+        _DFSVisit(v, state, f, s, p);
       }
     }
 
     return {
-      'distances': d,
+      'started': s,
       'predecessors': p,
       'finished': f,
     };
   }
 
-  void _DFSVisit(v, state, Map f, Map d, Map p) {
+  void _DFSVisit(v, state, Map f, Map s, Map p) {
     state[v] = State.visited;
     var neighbors = _adjList[v];
     _time++;
@@ -158,8 +158,8 @@ class Graph {
     for (var n in neighbors) {
       if (state[n] == State.unvisited) {
         p[n] = v;
-        d[n] = d[v] + 1;
-        _DFSVisit(n, state, f, d, p);
+        s[n] = _time;
+        _DFSVisit(n, state, f, s, p);
       }
     }
 
