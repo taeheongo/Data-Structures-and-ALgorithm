@@ -99,11 +99,11 @@ void testBinayrSearch() {
 }
 
 void main() {
-  // testBubbleSort();
-  // testModifiedBubbleSort();
-  // testSelectionSort();
-  // testInsertionSort();
-  // testMergeSort();
-  // testQuickSort();
-  // testBinayrSearch();
+  testBubbleSort();
+  testModifiedBubbleSort();
+  testSelectionSort();
+  testInsertionSort();
+  testMergeSort();
+  testQuickSort();
+  testBinayrSearch();
 }

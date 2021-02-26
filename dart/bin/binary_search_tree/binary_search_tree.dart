@@ -140,11 +140,11 @@ class BinarySearchTree {
         node = null;
         return node;
       } else if (node.left != null && node.right == null) {
-        // node.left를 최고 노드로 하는 트리에서 key와 같은 값을 다 제거하고난 node.left를 넣어줌.
+        // node.left를 root로 하는 트리에서 key와 같은 값을 다 제거하고난 node.left를 넣어줌.
         node = _removeNode(node.left, key);
         return node;
       } else if (node.left == null && node.right != null) {
-        // node.left를 최고 노드로 하는 트리에서 key와 같은 값을 다 제거하고난 node.left를 넣어줌.
+        // node.right를 root로 하는 트리에서 key와 같은 값을 다 제거하고난 node.right를 넣어줌.
         node = _removeNode(node.right, key);
         return node;
       } else {

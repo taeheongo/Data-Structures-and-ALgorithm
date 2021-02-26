@@ -1,5 +1,3 @@
-import 'dart:math';
-
 class ArrayList {
   List array;
 
@@ -81,6 +79,7 @@ class ArrayList {
     for (var i = 1; i < length; i++) {
       var j = i;
       var temp = array[j];
+
       while (j > 0 && array[j - 1] > temp) {
         array[j] = array[j - 1];
         j--;
@@ -148,7 +147,7 @@ class ArrayList {
       }
 
       if (index < right) {
-        // 인덱스가 index부터 right까지는 pivot보다 작거나 같음
+        // 인덱스가 index부터 right까지는 pivot보다 크거나 같음
         quick(list, index, right);
       }
     }
@@ -157,7 +156,7 @@ class ArrayList {
   int partition(List list, int left, int right) {
     var i = left;
     var j = right;
-    var pivot = (left + right) ~/ 2;
+    var pivot = list[(left + right) ~/ 2];
 
     while (i <= j) {
       while (list[i] < pivot) {
